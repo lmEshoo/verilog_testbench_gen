@@ -141,7 +141,7 @@ def formatPara(ParaList) :
         l1 = 6
         l2 = 2
     preDec = '\n'.join( ['parameter %s = %s;\n'
-                             %('PERIOD'.ljust(l1 +1), '10'.ljust(l2 ))])
+                             %('FREQ'.ljust(l1 +1), '20'.ljust(l2 ))])
     paraDec = preDec + paraDec
     return paraDec,paraDef
 
@@ -196,13 +196,19 @@ def writeTestBench(input_file):
     clk = '''
 initial
 begin
+    // 1000ns = 1MHz
+    // 20ns = 50MHz
     forever #(PERIOD)  clk=~clk;
 end'''
     rst = '''
-initial
-begin
-    #(PERIOD*2) rst_n  =  1;
+//Show Name of state on Screen (if any)
+reg    [11*10:0] name_state = 0           ;
+always @(state) begin
+    case (state)
+        START                      : name_state <= "START"                     ;
+    endcase
 end
+
 '''
     print("%s\n%s" % (clk,rst))
 
@@ -213,8 +219,10 @@ end
     operation = '''
 initial
 begin
-
-    $finish;
+    rst = 1;
+    #40  rst = 0;
+    
+    //$finish;
 end
 '''
     print(operation)
