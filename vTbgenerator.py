@@ -141,7 +141,7 @@ def formatPara(ParaList) :
         l1 = 6
         l2 = 2
     preDec = '\n'.join( ['parameter %s = %s;\n'
-                             %('FREQ'.ljust(l1 +1), '20'.ljust(l2 ))])
+                             %('PERIOD'.ljust(l1 +1), '20'.ljust(l2 ))])
     paraDec = preDec + paraDec
     return paraDec,paraDef
 
@@ -202,7 +202,7 @@ begin
 end'''
     rst = '''
 //Show Name of state on Screen (if any)
-reg    [11*10:0] name_state = 0           ;
+reg    [30*10:0] name_state = 0           ;
 always @(state) begin
     case (state)
         START                      : name_state <= "START"                     ;
