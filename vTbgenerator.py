@@ -180,7 +180,7 @@ def writeTestBench(input_file):
     timescale = '`timescale  1ns / 1ps\n'
     print("//~ `New testbench")
     print(timescale)
-    print("module tb_%s;\n" % name)
+    print("module %s_tb;\n" % name)
 
     # module_parameter_port_list
     if(paraDec!=''):
